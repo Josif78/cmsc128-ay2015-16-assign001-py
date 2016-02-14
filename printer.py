@@ -1,5 +1,11 @@
 #py file used to print the functions outputs
 
-from pyLib import wordToNum
+from pyLib import numToWord
 
-print wordToNum()
+#functions are
+	#numToWord
+	#wordToNum
+	#currConv
+	#delimit
+
+print numToWord()
