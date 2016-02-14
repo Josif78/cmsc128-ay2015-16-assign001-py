@@ -151,11 +151,86 @@ def basicNum(var):
         return True
     return False
 
+def specCheck(var):
+    if var == "eleven" or var == "twelve" or var == "thirteen" or var == "fourteen" or var == "fifteen" or var == "sixteen" or var == "seventeen" or var == "eighteen" or var == "nineteen":
+        return True
+    return False
+
 def sizeConv(var):
     num = 1
 
+    #if var == "thousand":
+     #   num = 1000
     if var == "hundred":
         num = 100
+
+    return num
+
+def onesConv(var):
+    num = 0
+
+    if var == "one":
+        num = 1
+    elif var == "two":
+        num = 2
+    elif var == "three":
+        num = 3
+    elif var == "four":
+        num = 4
+    elif var == "five":
+        num = 5
+    elif var == "six":
+        num = 6
+    elif var == "seven":
+        num = 7
+    elif var == "eight":
+        num = 8
+    elif var == "nine":
+        num = 9
+    elif var == "twenty":
+        num = 20
+    elif var == "thirty":
+        num = 30
+    elif var == "forty":
+        num = 40
+    elif var == "fifty":
+        num = 50
+    elif var == "sixty":
+        num = 60
+    elif var == "seventy":
+        num = 70
+    elif var == "eighty":
+        num = 80
+    elif var == "ninety":
+        num = 90
+
+    return num
+
+
+
+def tenTwenConv(var):
+    num = 0
+
+    if var == 'ten':
+        num = 10
+    elif var == "eleven":
+        num = 11
+    elif var == "twelve":
+        num = 12
+    elif var == "thirteen":
+        num = 13
+    elif var == "fourteen":
+        num = 14
+    elif var == "fifteen":
+        num = 15
+    elif var == "sixteen":
+        num = 16
+    elif var == "seventeen":
+        num = 17
+    elif var == "eighteen":
+        num = 18
+    elif var == "nineteen":
+        num = 19
 
     return num
 
@@ -165,19 +240,32 @@ def tailConvWN(lst):
     else:
         retVal = 1
         unitSize = 1
-        num = 4
+        num = 0
 
-        if not(basicNum(lst[1])):
-            unitSize = sizeConv(lst[1])
-            retVal = retVal + 1
+        num = onesConv(lst[0])
+        if specCheck(lst[0]):
+            num = tenTwenConv(lst[0])
+            lst = lst[2:]
+        else:
+            lst = lst[1:]
 
-        if 'thousand' in lst:
-            unitSize = unitSize * 1000
-            retVal = retVal + 1
+        if len(lst) > 0:
+            if lst[0] == 'hundred':
+                unitSize = 100
+                lst = lst[1:]
+
+                #removes thousand from the list
+            if lst[0] == 'thousand':
+                unitSize = unitSize * 1000
+                lst = lst[1:]
+
+                #checker for values above one thousand
+            if 'thousand' in lst:
+                unitSize = unitSize * 1000
 
         num = num * unitSize
 
-    return num + tailConvWN(lst[retVal:])
+    return num + tailConvWN(lst)
 
 def wordToNumHelp(var):
 
