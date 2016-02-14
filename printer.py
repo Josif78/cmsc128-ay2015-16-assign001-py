@@ -1,5 +1,5 @@
 #py file used to print the functions outputs
 
-from pyLib import delimit
+from pyLib import wordToNum
 
-print delimit()
+print wordToNum()
