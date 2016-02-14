@@ -159,8 +159,8 @@ def specCheck(var):
 def sizeConv(var):
     num = 1
 
-    if var == "thousand":
-        num = 1000
+    #if var == "thousand":
+     #   num = 1000
     if var == "hundred":
         num = 100
 
@@ -187,13 +187,33 @@ def onesConv(var):
         num = 8
     elif var == "nine":
         num = 9
+    elif var == "twenty":
+        num = 20
+    elif var == "thirty":
+        num = 30
+    elif var == "forty":
+        num = 40
+    elif var == "fifty":
+        num = 50
+    elif var == "sixty":
+        num = 60
+    elif var == "seventy":
+        num = 70
+    elif var == "eighty":
+        num = 80
+    elif var == "ninety":
+        num = 90
 
     return num
+
+
 
 def tenTwenConv(var):
     num = 0
 
-    if var == "eleven":
+    if var == 'ten':
+        num = 10
+    elif var == "eleven":
         num = 11
     elif var == "twelve":
         num = 12
@@ -230,12 +250,13 @@ def tailConvWN(lst):
             lst = lst[1:]
 
         if len(lst) > 0:
-            if not(basicNum(lst[0])):
-                unitSize = sizeConv(lst[0])
+            if lst[0] == 'hundred':
+                unitSize = 100
                 lst = lst[1:]
 
                 #removes thousand from the list
             if lst[0] == 'thousand':
+                unitSize = unitSize * 1000
                 lst = lst[1:]
 
                 #checker for values above one thousand
