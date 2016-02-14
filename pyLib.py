@@ -1,6 +1,8 @@
 #Joseph Alcantara
 #CMSC 128 AB-3L
 
+#!/usr/bin/python
+import re
 #print "Nepu-Nepu"
     
     #function that converts integers to strings
@@ -144,9 +146,34 @@ def numToWord():
 
     return acc
 
-def wordtoNum():
+def tailConvWN(acc, var):
+
+    if var != '@':
+        acc = acc + tailConvWN(acc, var)
+    return acc
+
+def wordToNum():
     var = raw_input('Enter input: ')
 
     acc = ""
 
-    return "Nepu"
+    if re.match( r'Nepu', var, re.I):
+        var = "Nowa"
+
+    return var
+
+def delimit():
+    var = raw_input('Enter input: ')
+
+    lst = var.split(',')
+    if len(lst[2]) != 3:
+        split = ',';
+    else:
+        split = lst[2][1:2]
+
+    print lst[0]
+    print lst[1]
+    print split
+
+    return "Blanc"
+
