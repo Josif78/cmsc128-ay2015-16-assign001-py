@@ -146,21 +146,67 @@ def numToWord():
 
     return acc
 
-def tailConvWN(acc, var):
+def basicNum(var):
+    if var == "one" or var == "two" or var == "three" or var == "four" or var == "five" or var == "six" or var == "seven" or var == "eight" or var == "nine":
+        return True
+    return False
 
-    if var != '@':
-        acc = acc + tailConvWN(acc, var)
-    return acc
+def sizeConv(var):
+    num = 1
+
+    if var == "hundred":
+        num = 100
+
+    return num
+
+def tailConvWN(lst):
+    if len(lst) == 0:
+        return 0
+    else:
+        retVal = 1
+        unitSize = 1
+        num = 4
+
+        if not(basicNum(lst[1])):
+            unitSize = sizeConv(lst[1])
+            retVal = retVal + 1
+
+        if 'thousand' in lst:
+            unitSize = unitSize * 1000
+            retVal = retVal + 1
+
+        num = num * unitSize
+
+    return num + tailConvWN(lst[retVal:])
+
+def wordToNumHelp(var):
+
+    lst = var.split(' ')
+
+    """i = 0
+    while len(lst) > i:
+        print lst[i]
+        i+=1"""
+
+    var = tailConvWN(lst)
+
+                #regex, string to check, options
+    #if re.match(r'Nepu', var, re.I):
+        #var = "Nowa"
+
+    return var
 
 def wordToNum():
     var = raw_input('Enter input: ')
 
-    acc = ""
+    return wordToNumHelp(var)
 
-    if re.match( r'Nepu', var, re.I):
-        var = "Nowa"
+def currConv():
+    var = raw_input('Enter input: ')
 
-    return var
+    lst = var.split(',')
+
+    return lst[1] + str(wordToNumHelp(lst[0]))
 
 def delimit():
     var = raw_input('Enter input: ')
@@ -191,7 +237,7 @@ def delimit():
         val = lst[0][0:jumps] + splitter
         lst[0] = lst[0][jumps:]
         
-        #
+        #while string isn't empty
     while len(lst[0]) >= denom:
         val = val + lst[0][0:denom] + splitter
         
