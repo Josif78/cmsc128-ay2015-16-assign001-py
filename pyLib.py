@@ -254,14 +254,15 @@ def tailConvWN(lst):
                 unitSize = 100
                 lst = lst[1:]
 
-                #removes thousand from the list
-            if lst[0] == 'thousand':
-                unitSize = unitSize * 1000
-                lst = lst[1:]
+            if len(lst) > 0:
+                    #removes thousand from the list
+                if lst[0] == 'thousand':
+                    unitSize = unitSize * 1000
+                    lst = lst[1:]
 
-                #checker for values above one thousand
-            if 'thousand' in lst:
-                unitSize = unitSize * 1000
+                    #checker for values above one thousand
+                if 'thousand' in lst:
+                    unitSize = unitSize * 1000
 
         num = num * unitSize
 
@@ -271,16 +272,13 @@ def wordToNumHelp(var):
 
     lst = var.split(' ')
 
-    """i = 0
-    while len(lst) > i:
-        print lst[i]
-        i+=1"""
+    #regex, string to check, options
+    if re.match(r'one million', var, re.I):
+        var = 1000000
+    else:
+        var = tailConvWN(lst)
 
-    var = tailConvWN(lst)
-
-                #regex, string to check, options
-    #if re.match(r'Nepu', var, re.I):
-        #var = "Nowa"
+                
 
     return var
 
