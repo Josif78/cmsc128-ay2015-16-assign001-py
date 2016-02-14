@@ -165,15 +165,40 @@ def wordToNum():
 def delimit():
     var = raw_input('Enter input: ')
 
+        #split into list
     lst = var.split(',')
+
+        #checker if value exceeds one million
+    if int(lst[0]) > 1000000 or len(lst[2]) > 3:
+        return "Invalid Input"
+
+        #checker for splitter character
     if len(lst[2]) != 3:
-        split = ',';
+        splitter = ',';
     else:
-        split = lst[2][1:2]
+        splitter = lst[2][1:2]
 
-    print lst[0]
-    print lst[1]
-    print split
+    val = "" #accumulator for the value to be printed
+    denom = int(lst[1]) #number of jumps to be split
+    numSize = len(lst[0]) #size of the initial number
+    jumps = (numSize % denom) #number of jumps for the first split
 
-    return "Blanc"
+    if numSize < denom:
+        return "Invalid Input"
+
+        #if the number cannot be perfectly divided by the number of jumps
+    if jumps > 0:
+        val = lst[0][0:jumps] + splitter
+        lst[0] = lst[0][jumps:]
+        
+        #
+    while len(lst[0]) >= denom:
+        val = val + lst[0][0:denom] + splitter
+        
+        if len(lst[0]) == (denom):
+            lst[0] = ""
+            val = val[0:len(val)-1]
+        lst[0] = lst[0][denom:]
+
+    return val
 
